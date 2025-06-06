@@ -1,0 +1,23 @@
+name: "build and push docker image with a static tag"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build_push_Docker_Image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        users: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: build and push docker image
+        run: |
+          docker build -t docker.io/damith1987/supermario_devsecops:1 .
+          docker push docker.io/damith1987/supermario_devsecops:1
