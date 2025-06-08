@@ -19,9 +19,9 @@ jobs:
           docker pull docker.io/damith1987/supermario_devsecops:${{ env.VERSION }}
           docker save -o supermariolatestdockerimage.tar docker.io/damith1987/supermario_devsecops:${{ env.VERSION }}
       - name: List files in root directory
-        run: pwd
         run: ls -ltrah
-
+      - name: find the working directory
+        run: pwd
       - name: run Trivy vulnerability scan in tarball_mode
         uses: aquasecurity/trivy-action@master
         with:
