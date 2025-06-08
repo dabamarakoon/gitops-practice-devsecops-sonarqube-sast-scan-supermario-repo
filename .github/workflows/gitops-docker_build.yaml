@@ -23,4 +23,4 @@ jobs:
       - name: build and push docker image
         run: |
           docker build -t docker.io/damith1987/supermario_devsecops:${{env.VERSION}} .
-          docker push docker.io/damith1987/supermario_devsecops:1
+          docker push docker.io/damith1987/supermario_devsecops:${{env.VERSION}}
