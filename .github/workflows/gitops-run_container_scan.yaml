@@ -1,4 +1,3 @@
----
 name: Run Container Scan on Docker Image with Quality Gate
 on:
   push:
@@ -19,6 +18,9 @@ jobs:
         run: |
           docker pull docker.io/damith1987/supermario_devsecops:${{ env.VERSION }}
           docker save -o supermariolatestdockerimage.tar docker.io/damith1987/supermario_devsecops:${{ env.VERSION }}
+      - name: List files in root directory
+        run: ls -ltrah
+
       - name: run Trivy vulnerability scan in tarball_mode
         uses: aquasecurity/trivy-action@master
         with:
