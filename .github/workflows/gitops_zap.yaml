@@ -1,0 +1,29 @@
+name: ZAP Baseline DAST Scan
+
+on:
+  workflow_dispatch:  # Triggered manually via GitHub UI
+  # Optional: also allow it to run after push to GitOps repo
+  # push:
+  #   paths:
+  #     - 'k8s/**'
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.10.0
+        with:
+          target: 'https://myapp.dev.example.com'
+#          rules_file_name: '.zap/rules.tsv'  # Optional: define ZAP rules/thresholds
+          cmd_options: '-a -t 300'           # Aggressive mode, 5 min timeout
+
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: zap-report
+          path: report_html.html
