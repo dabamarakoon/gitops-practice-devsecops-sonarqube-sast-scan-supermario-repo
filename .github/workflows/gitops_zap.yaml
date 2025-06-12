@@ -23,7 +23,7 @@ jobs:
           cmd_options: '-a -t 300'           # Aggressive mode, 5 min timeout
 
       - name: Upload ZAP Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: zap-report
           path: report_html.html
